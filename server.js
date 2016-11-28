@@ -14,7 +14,8 @@
 
     // configuration =================
 
-    mongoose.connect('mongodb://localhost/todos');     // connect to mongoDB database 
+     connection_string = process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" + process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" + process.env.OPENSHIFT_MONGODB_DB_HOST + ':' + process.env.OPENSHIFT_MONGODB_DB_PORT + '/' + process.env.OPENSHIFT_APP_NAME;
+     mongoose.connect('mongodb://' + connection_string);     // connect to mongoDB database 
 
     app.use(express.static(__dirname + '/public'));                 // set the static files location /public/img will be /img for users
     app.use(morgan('dev'));                                         // log every request to the console
