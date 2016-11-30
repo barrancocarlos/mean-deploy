@@ -6,16 +6,20 @@
     var bodyParser = require('body-parser');    // pull information from HTML POST (express4)
     var methodOverride = require('method-override'); // simulate DELETE and PUT (express4)
 
+    //OPENSHIFT CODE
     // set the port of our application
-
     var server_port = process.env.OPENSHIFT_NODEJS_PORT || 8080;
     var server_ip_address = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
+    //OPENSHIFT CODE
 
 
     // configuration =================
 
+
+    //OPENSHIFT CODE
      var connection_string = process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" + process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" + process.env.OPENSHIFT_MONGODB_DB_HOST + ':' + process.env.OPENSHIFT_MONGODB_DB_PORT + '/' + process.env.OPENSHIFT_APP_NAME;
      mongoose.connect('mongodb://' + connection_string);     // connect to mongoDB database 
+     //OPENSHIFT CODE
 
     app.use(express.static(__dirname + '/public'));                 // set the static files location /public/img will be /img for users
     app.use(morgan('dev'));                                         // log every request to the console
@@ -89,7 +93,9 @@
         res.sendfile('./public/index.html'); // load the single view file (angular will handle the page changes on the front-end)
     });
 
+    //OPENSHIFT CODE
     // listen (start app with node server.js) ======================================
     app.listen(server_port, server_ip_address, function () {
         console.log( "Listening on " + server_ip_address + ", server_port " + server_port  );
     });
+    //OPENSHIFT CODE
